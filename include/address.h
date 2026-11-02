@@ -26,3 +26,7 @@ static const uint16_t UNUSABLE_END = 0xFEFF;
 
 //IE
 static const uint16_t IE = 0xFFFF;
+
+//header locations
+static const uint16_t romCode = 0x0148;
+static const uint16_t ramCode = 0x0149;
