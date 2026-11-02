@@ -14,7 +14,7 @@ class Bus {
         
         //helpers
         uint8_t read(uint16_t address);
-        void write(uint16_t address, uint8_t value); //I wanna give back what was there and what is written now
+        void write(uint16_t address, uint8_t value); 
 
     private:
 

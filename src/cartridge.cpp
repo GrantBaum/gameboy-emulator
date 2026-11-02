@@ -87,3 +87,19 @@ size_t Cartridge::romBytes(uint8_t data){
             break;
     }
 }
+void Cartridge::write(uint16_t address, uint8_t value){
+    //ROM: can't change it. Bank switching commands go here later (Phase 7).
+    if(address <= ROM_N_END){
+        return;
+    }
+
+    //external RAM: store it if the cartridge has RAM and it's in range
+    if(address >= EXT_START && address <= EXT_END){
+        size_t index = address - EXT_START;
+        if(index < ext_ram.size()){
+            ext_ram[index] = value;
+        }
+    }
+
+    //anything else: the bus should never send it here, so ignore it
+}

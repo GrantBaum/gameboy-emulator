@@ -86,3 +86,43 @@ Bus::Reigon Bus::getReigon(uint16_t addr){
     }
     else throw std::runtime_error("INVALID RAM ADDRESS LOCATION");
 }
+void Bus::write(uint16_t address, uint8_t value){
+    Reigon reig = getReigon(address);
+
+    if(reig == Reigon::ROMO || reig == Reigon::ROMN){
+        //do nothing for now, in the future pass to cartridge
+    }
+    if(reig == Reigon::VRAM){
+        address -= VRAM_START;
+        vram.at(address) = value;
+    }
+    if(reig == Reigon::EXT){
+        cartridge.write(address, value);
+    }
+    if(reig == Reigon::WRAM){
+        address -= WORK_START;
+        work_ram.at(address) = value;
+    }
+    if(reig == Reigon::ECHO){
+        address -= ECHO_START;
+        work_ram.at(address) = value;
+    }
+    if(reig == Reigon::OAM){
+        address -= OAM_START;
+        oam.at(address) = value;
+    }
+    if(reig == Reigon::UNUSABLE){
+        //do nothing on purpose
+    }
+    if(reig == Reigon::IO){
+        address -= IO_START;
+        io_ram.at(address) = value;
+    }
+    if(reig == Reigon::HIGH){
+        address -= HIGH_START;
+        high_ram.at(address) = value;
+    }
+    if(reig == Reigon::IE){
+        ie_byte = value;
+    }
+}
