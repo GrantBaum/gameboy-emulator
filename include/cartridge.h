@@ -7,8 +7,6 @@
 
 class Cartridge{
 
-    friend struct CartridgeTest;
-
     public:
         void load(const std::string& path);
         uint8_t read(uint16_t address);

@@ -14,7 +14,17 @@ void Cartridge::load(const std::string& path){
         std::istreambuf_iterator<char>());
 }
 uint8_t Cartridge::read(uint16_t address){
-    return rom.at(address);
+    if(address <= 0x7FFF) return rom.at(address);
+
+    else if(address >= 0xA000 && address <= 0xBFFF){
+        address -= 0xA000;
+        if(ext_ram.empty()){
+            return 0xFF;
+        }
+        else return ext_ram.at(address);
+    }
+
+    else return 0xFF;
 }
 size_t Cartridge::ramBytes(uint8_t data){
     switch(data){
