@@ -1,0 +1,10 @@
+# build output
+gameboy
+test_load
+*.o
+
+# ROMs
+*.gb
+
+# editor
+.vscode/
