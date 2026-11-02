@@ -1,7 +1,7 @@
 #include "bus.h"
 #include <stdexcept>
 
-Bus::Bus(Cartridge& cart) : cartridge(cart){}
+Bus::Bus(Cartridge& cart, Ppu& graphicsCard) : cartridge(cart), graphics(graphicsCard){}
 uint8_t Bus::read(uint16_t address){
 
     Reigon reig = getReigon(address);
@@ -14,8 +14,8 @@ uint8_t Bus::read(uint16_t address){
             return cartridge.read(address);
             break;
         case Reigon::VRAM:
-            address -= VRAM_START;
-            return vram.at(address);
+            return graphics.read(address);
+            break;
         case Reigon::EXT:
             return cartridge.read(address);
             break;
@@ -28,8 +28,7 @@ uint8_t Bus::read(uint16_t address){
             return work_ram.at(address); //same as work ram
             break;
         case Reigon::OAM:
-            address -= OAM_START;
-            return oam.at(address);
+            return graphics.read(address);
             break;
         case Reigon::UNUSABLE:
             return 0xFF;
@@ -93,8 +92,7 @@ void Bus::write(uint16_t address, uint8_t value){
         //do nothing for now, in the future pass to cartridge
     }
     if(reig == Reigon::VRAM){
-        address -= VRAM_START;
-        vram.at(address) = value;
+        graphics.write(address, value);
     }
     if(reig == Reigon::EXT){
         cartridge.write(address, value);
@@ -108,8 +106,7 @@ void Bus::write(uint16_t address, uint8_t value){
         work_ram.at(address) = value;
     }
     if(reig == Reigon::OAM){
-        address -= OAM_START;
-        oam.at(address) = value;
+        graphics.write(address, value);
     }
     if(reig == Reigon::UNUSABLE){
         //do nothing on purpose

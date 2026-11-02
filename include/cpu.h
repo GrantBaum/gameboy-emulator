@@ -11,7 +11,7 @@ class Cpu{
     private:
         //reference to the bus
         Bus& memory;
-        
+
         //special registers
         uint16_t PC; //program counter
         uint16_t SP; //stack pointer
@@ -27,10 +27,10 @@ class Cpu{
         uint8_t regL;
 
         //getters for the 16 bit registers
-        uint16_t getAF() const{return (regA << 8) | regF};
-        uint16_t getBC() const{return (regB << 8) | regC};
-        uint16_t getDE() const{return (regD << 8) | regE};
-        uint16_t getHL() const{return (regH << 8) | regL};
+        uint16_t getAF() const{return (regA << 8) | regF;}
+        uint16_t getBC() const{return (regB << 8) | regC;}
+        uint16_t getDE() const{return (regD << 8) | regE;}
+        uint16_t getHL() const{return (regH << 8) | regL;}
 
         //setters for the 16 bit registers
         void setAF(uint16_t val);

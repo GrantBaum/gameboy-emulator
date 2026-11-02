@@ -21,49 +21,37 @@ void Cpu::setHL(uint16_t val){
 }
 
 //getters and setters for flags
-bool getZ(){
-    if((regF & z_MASK) != 0){
-        return true;
-    }
-    else return false;
+bool Cpu::getZ(){
+    return (regF & z_MASK) != 0;
 }
-bool getH(){
-    if((regF & h_MASK) != 0){
-        return true;
-    }
-    else return false;
+bool Cpu::getH(){
+    return (regF & h_MASK) != 0;
 }
-bool getN(){
-    if((regF & n_MASK) != 0){
-        return true;
-    }
-    else return false;
+bool Cpu::getN(){
+    return (regF & n_MASK) != 0;
 }
-bool getC(){
-    if((regF & c_MASK) != 0){
-        return true;
-    }
-    else return false;
+bool Cpu::getC(){
+    return (regF & c_MASK) != 0;
 }
-void setZ(bool val){
+void Cpu::setZ(bool val){
     if(val){
         regF = regF | z_MASK;
     }
     else regF = regF & (~z_MASK);
 }
-void setH(bool val){
+void Cpu::setH(bool val){
     if(val){
         regF = regF | h_MASK;
     }
     else regF = regF & (~h_MASK);
 }
-void setN(bool val){
+void Cpu::setN(bool val){
     if(val){
         regF = regF | n_MASK;
     }
     else regF = regF & (~n_MASK);
 }
-void setC(bool val){
+void Cpu::setC(bool val){
     if(val){
         regF = regF | c_MASK;
     }

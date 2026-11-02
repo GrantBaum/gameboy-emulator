@@ -1,18 +1,24 @@
 #include "cartridge.h"
+#include "ppu.h"
 #include "bus.h"
 #include <iostream>
 #include <format>
+#include <exception>
 
-//Phase 1.3 test: write a byte, read it back
+//Phase 1.3 test: write a byte, read it back. VRAM and OAM now go through the PPU.
 int main(int argc, char* argv[]) {
     if (argc < 2) {
         std::cerr << "Usage: " << argv[0] << " <rom.gb>\n";
         return 1;
     }
 
+    try {
+
+    //make them in order: cartridge and PPU first, then the bus that connects them
     Cartridge cart;
     cart.load(argv[1]);
-    Bus bus(cart);
+    Ppu ppu;
+    Bus bus(cart, ppu);
 
     int failed = 0;
 
@@ -51,6 +57,25 @@ int main(int argc, char* argv[]) {
     if (!romSame) failed++;
     std::cout << (romSame ? "PASS" : "FAIL") << "  writing ROM doesn't change it\n";
 
+    //no external RAM on this cartridge, so it reads 0xFF even after a write
+    bus.write(0xA000, 0x42);
+    bool noRam = bus.read(0xA000) == 0xFF;
+    if (!noRam) failed++;
+    std::cout << (noRam ? "PASS" : "FAIL") << "  0xA000 reads 0xFF with no cartridge RAM\n";
+
+    //IE and the last high RAM byte don't share storage
+    bus.write(0xFFFE, 0x11);
+    bus.write(0xFFFF, 0x22);
+    bool separate = bus.read(0xFFFE) == 0x11 && bus.read(0xFFFF) == 0x22;
+    if (!separate) failed++;
+    std::cout << (separate ? "PASS" : "FAIL") << "  0xFFFE and 0xFFFF are separate\n";
+
     std::cout << "\n" << (failed == 0 ? "All passed" : std::format("{} failed", failed)) << "\n";
     return failed == 0 ? 0 : 1;
+
+    }
+    catch (const std::exception& err) {
+        std::cerr << "Error: " << err.what() << "\n";
+        return 1;
+    }
 }
