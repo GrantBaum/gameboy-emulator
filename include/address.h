@@ -31,3 +31,12 @@ static const uint16_t IE = 0xFFFF;
 //header locations
 static const uint16_t romCode = 0x0148;
 static const uint16_t ramCode = 0x0149;
+
+//masks
+static const uint8_t z_MASK = 0b10000000; //zero flag
+static const uint8_t n_MASK = 0b01000000; //subtraction flag
+static const uint8_t h_MASK = 0b00100000; //half carry flag
+static const uint8_t c_MASK = 0b00010000; //carry flag
+
+static const uint16_t HI_MASK = 0xFF00;
+static const uint16_t LO_MASK = 0x00FF;
