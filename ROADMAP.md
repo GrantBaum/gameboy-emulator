@@ -28,9 +28,9 @@ Pan Docs files are in your offline copy at `~/pandocs/src/`. Open one in VS Code
 - `nombc.md`: the simplest cartridge, no bank chip
 
 **Build**
-- [ ] `Cartridge` with a ROM vector and `load(const std::string& path)`
-- [ ] Throw if the file won't open or is smaller than `0x150` bytes
-- [ ] `read(address)` returns the ROM byte at that address
+- [x] `Cartridge` with a ROM vector and `load(const std::string& path)`
+- [x] Throw if the file won't open or is smaller than `0x150` bytes
+- [x] `read(address)` returns the ROM byte at that address
 
 **Done when:** main prints the title, type, size codes and a passing checksum.
 
@@ -43,10 +43,10 @@ Pan Docs files are in your offline copy at `~/pandocs/src/`. Open one in VS Code
 **Read:** the ROM size and RAM size tables in `The_Cartridge_Header.md`
 
 **Build**
-- [ ] A helper that turns the ROM size code into bytes
-- [ ] A helper that turns the RAM size code into bytes
-- [ ] Size the external RAM vector from the RAM size code
-- [ ] Warn if the file size doesn't match what the header says
+- [x] A helper that turns the ROM size code into bytes
+- [x] A helper that turns the RAM size code into bytes
+- [x] Size the external RAM vector from the RAM size code
+- [x] Warn if the file size doesn't match what the header says
 
 **Done when:** main prints real sizes like "32 KB ROM, no RAM."
 
@@ -59,14 +59,14 @@ Pan Docs files are in your offline copy at `~/pandocs/src/`. Open one in VS Code
 - `Hardware_Reg_List.md`: just skim, to see what lives in `FF00` to `FF7F`
 
 **Build**
-- [ ] Named constants for every range's start and end
-- [ ] Arrays: VRAM, work RAM, OAM, I/O and high RAM, plus a `uint8_t` for IE
-- [ ] A reference to the Cartridge, set in the constructor
-- [ ] A private region enum and a private helper that maps an address to its region
-- [ ] Public `read(address)` and `write(address, value)` that switch on the region
-- [ ] Echo RAM goes to work RAM minus `0x2000`
-- [ ] Unusable area reads `0xFF` and ignores writes
-- [ ] Writes to ROM are ignored for now
+- [x] Named constants for every range's start and end
+- [x] Arrays: VRAM, work RAM, OAM, I/O and high RAM, plus a `uint8_t` for IE
+- [x] A reference to the Cartridge, set in the constructor
+- [x] A private region enum and a private helper that maps an address to its region
+- [x] Public `read(address)` and `write(address, value)` that switch on the region
+- [x] Echo RAM goes to work RAM minus `0x2000`
+- [x] Unusable area reads `0xFF` and ignores writes
+- [x] Writes to ROM are ignored for now
 
 **Done when:** these all pass in a test main:
 - Read `0x0100` through the bus matches the ROM file
