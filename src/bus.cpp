@@ -42,7 +42,7 @@ uint8_t Bus::read(uint16_t address){
             return high_ram.at(address);
             break;
         case Reigon::IE:
-            return ie_byte;
+            return IE_byte;
             break;
         
         default:
@@ -120,6 +120,6 @@ void Bus::write(uint16_t address, uint8_t value){
         high_ram.at(address) = value;
     }
     if(reig == Reigon::IE){
-        ie_byte = value;
+        IE_byte = value;
     }
 }

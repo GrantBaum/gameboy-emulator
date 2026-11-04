@@ -37,6 +37,11 @@ static const uint8_t z_MASK = 0b10000000; //zero flag
 static const uint8_t n_MASK = 0b01000000; //subtraction flag
 static const uint8_t h_MASK = 0b00100000; //half carry flag
 static const uint8_t c_MASK = 0b00010000; //carry flag
+static const uint8_t vblank_MASK = 0b00000001;
+static const uint8_t stat_MASK = 0b00000010;
+static const uint8_t timer_MASK = 0b00000100;
+static const uint8_t serial_MASK = 0b00001000;
+static const uint8_t joypad_MASK = 0b00010000;
 
 static const uint16_t HI_MASK = 0xFF00;
 static const uint16_t LO_MASK = 0x00FF;

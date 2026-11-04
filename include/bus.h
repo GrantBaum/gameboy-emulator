@@ -1,6 +1,7 @@
 #pragma once
 #include "address.h"
 #include "cartridge.h"
+#include "interrupts.h"
 #include "ppu.h"
 #include <array>
 #include <cstdint>
