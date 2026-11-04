@@ -3,26 +3,23 @@
 class Interrupts{
 
     public:
+    //enum class for the different bits
+    enum class Type{
+      Vblank, //bit 0
+      Stat, //bit 1
+      Timer, //bit 2
+      Serial, //bit 3
+      Joypad //bit 4
+    };
+
+    void request(Type type); //turn that bit on in IF
+    void clear(Type type); //turn that bit off in IF
+    uint8_t pending(); //return IE & IF, only the 5 real bits
+
+    uint8_t read(uint16_t address); //FF0F is IF, FFFF is IE
+    void write(uint16_t address, uint8_t value);
 
     private:
+      uint8_t IE_byte;
+      uint8_t IF_byte;
 };
-
-/*
-
-Interrupts
-  public:
-    enum class Type: VBlank = bit 0, Stat = bit 1, Timer = bit 2,
-                     Serial = bit 3, Joypad = bit 4
-
-    request(type)         turn that bit on in IF
-    clear(type)           turn that bit off in IF (CPU calls this once it handles one)
-    pending()             return IE & IF, only the 5 real bits
-
-    read(address)         FF0F gives IF, FFFF gives IE
-    write(address, value) FF0F sets IF, FFFF sets IE
-
-  private:
-    IF    one byte
-    IE    one byte
-    
-    */

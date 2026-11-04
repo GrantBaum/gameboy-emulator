@@ -35,7 +35,6 @@ class Bus {
         std::array<uint8_t, 8192> work_ram{}; //8KiB
         std::array<uint8_t, 128> io_ram{};
         std::array<uint8_t, 127> high_ram{};
-        uint8_t ie_byte;
 
         //private helpers
         Bus::Reigon getReigon(uint16_t addr);

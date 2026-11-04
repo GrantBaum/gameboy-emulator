@@ -4,8 +4,19 @@
 class Joypad{
 
     public:
+      enum class Button{
+        RIGHT, LEFT, UP, DOWN, A, B, SELECT, START
+      };
+
+      Joypad(Interrupts& inter);
+
+      uint8_t read(uint16_t address);
+      void write(uint16_t address, uint8_t data);
+      void press(Button button);
+      void release(Button button);
 
     private:
+      
 };
 
 /*
